@@ -1,14 +1,259 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jogo de Xadrez</title>
+    <title>Xadrez Educativo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-    <h1>Jogo de Xadrez</h1>
-    <div id="tabuleiro"></div>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1><i class="fas fa-chess"></i> Xadrez Educativo</h1>
+        <nav>
+          <ul>
+            <li><a href="#" class="active" data-section="jogo">Jogar</a></li>
+            <li><a href="#" data-section="tutoriais">Tutoriais</a></li>
+            <li><a href="#" data-section="licoes">Lições</a></li>
+            <li><a href="#" data-section="sobre">Sobre</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <section id="jogo" class="active-section">
+          <div class="jogo-container">
+            <div class="coluna-esquerda">
+              <div class="painel-info">
+                <div class="info-jogador">
+                  <span class="jogador brancas">Brancas</span>
+                  <span class="tempo" id="tempo-brancas">10:00</span>
+                </div>
+                <div class="nivel-container">
+                  <label for="nivel-dificuldade">Nível:</label>
+                  <select id="nivel-dificuldade">
+                    <option value="iniciante">Iniciante</option>
+                    <option value="intermediário">Intermediário</option>
+                    <option value="avançado">Avançado</option>
+                  </select>
+                </div>
+                <div class="info-jogador">
+                  <span class="jogador pretas">Pretas</span>
+                  <span class="tempo" id="tempo-pretas">10:00</span>
+                </div>
+              </div>
+              <div id="tabuleiro"></div>
+              <div class="controles">
+                <button id="botao-dica" class="btn btn-primary">
+                  <i class="fas fa-lightbulb"></i> Pedir Dica
+                </button>
+                <button id="botao-reiniciar" class="btn">
+                  <i class="fas fa-redo"></i> Reiniciar
+                </button>
+                <button id="botao-desfazer" class="btn">
+                  <i class="fas fa-undo"></i> Desfazer
+                </button>
+              </div>
+            </div>
+            <div class="coluna-direita">
+              <div id="painel-mensagens">
+                <h3>Mensagens</h3>
+                <div class="mensagem-conteudo">
+                  Bem-vindo ao Xadrez Educativo! Selecione uma peça para começar
+                  a jogar.
+                </div>
+              </div>
+              <div id="painel-historico">
+                <h3>Histórico de Movimentos</h3>
+                <div id="lista-movimentos"></div>
+                <div id="controles-historico">
+                  <button id="btn-inicio" class="btn-icon">
+                    <i class="fas fa-fast-backward"></i>
+                  </button>
+                  <button id="btn-anterior" class="btn-icon">
+                    <i class="fas fa-step-backward"></i>
+                  </button>
+                  <button id="btn-proximo" class="btn-icon">
+                    <i class="fas fa-step-forward"></i>
+                  </button>
+                  <button id="btn-fim" class="btn-icon">
+                    <i class="fas fa-fast-forward"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="tutoriais">
+          <h2>Tutoriais de Aberturas</h2>
+          <div class="tutorial-selector">
+            <label for="tutorial-abertura">Selecione uma abertura:</label>
+            <select id="tutorial-abertura">
+              <option value="">Selecione um tutorial...</option>
+              <option value="ruy_lopez">Abertura Ruy López</option>
+              <option value="defesa_siciliana">Defesa Siciliana</option>
+              <option value="gambito_dama">Gambito da Dama</option>
+              <option value="defesa_francesa">Defesa Francesa</option>
+              <option value="abertura_inglesa">Abertura Inglesa</option>
+            </select>
+            <button id="iniciar-tutorial" class="btn btn-primary">
+              Iniciar Tutorial
+            </button>
+          </div>
+          <div class="tutorial-info">
+            <div class="tutorial-descricao">
+              <h3>Sobre os Tutoriais</h3>
+              <p>
+                Nossos tutoriais interativos ensinam as aberturas mais populares
+                do xadrez. Selecione uma abertura acima para começar a aprender.
+              </p>
+            </div>
+            <div class="tutorial-progresso">
+              <h3>Progresso</h3>
+              <div class="progresso-barra">
+                <div class="progresso-valor" style="width: 0%"></div>
+              </div>
+              <div class="progresso-texto">0/0 movimentos</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="licoes">
+          <h2>Lições de Xadrez</h2>
+          <div class="licoes-filtro">
+            <button class="btn btn-filtro active" data-nivel="iniciante">
+              Iniciante
+            </button>
+            <button class="btn btn-filtro" data-nivel="intermediario">
+              Intermediário
+            </button>
+            <button class="btn btn-filtro" data-nivel="avancado">
+              Avançado
+            </button>
+          </div>
+          <div class="licoes-grid">
+            <div class="licao-card" data-nivel="iniciante">
+              <div class="licao-icone"><i class="fas fa-chess-pawn"></i></div>
+              <h3>Movimentos Básicos das Peças</h3>
+              <p>Aprenda como cada peça se move no tabuleiro de xadrez.</p>
+              <button class="btn btn-sm">Iniciar Lição</button>
+            </div>
+            <div class="licao-card" data-nivel="iniciante">
+              <div class="licao-icone"><i class="fas fa-chess-king"></i></div>
+              <h3>Xeque e Xeque-mate</h3>
+              <p>
+                Aprenda o que é xeque, como defender-se dele e como dar
+                xeque-mate.
+              </p>
+              <button class="btn btn-sm">Iniciar Lição</button>
+            </div>
+            <div class="licao-card" data-nivel="intermediario">
+              <div class="licao-icone"><i class="fas fa-chess-knight"></i></div>
+              <h3>Táticas Básicas</h3>
+              <p>
+                Aprenda táticas fundamentais como garfos, espetos e cravadas.
+              </p>
+              <button class="btn btn-sm">Iniciar Lição</button>
+            </div>
+            <div class="licao-card" data-nivel="intermediario">
+              <div class="licao-icone"><i class="fas fa-chess-pawn"></i></div>
+              <h3>Estruturas de Peões</h3>
+              <p>
+                Aprenda sobre diferentes estruturas de peões e sua importância
+                estratégica.
+              </p>
+              <button class="btn btn-sm">Iniciar Lição</button>
+            </div>
+            <div class="licao-card" data-nivel="avancado">
+              <div class="licao-icone"><i class="fas fa-chess-king"></i></div>
+              <h3>Finais de Rei e Peão</h3>
+              <p>Aprenda princípios fundamentais dos finais de rei e peão.</p>
+              <button class="btn btn-sm">Iniciar Lição</button>
+            </div>
+            <div class="licao-card" data-nivel="avancado">
+              <div class="licao-icone"><i class="fas fa-chess-queen"></i></div>
+              <h3>Sacrifícios Posicionais</h3>
+              <p>
+                Aprenda a avaliar e executar sacrifícios posicionais para obter
+                vantagem a longo prazo.
+              </p>
+              <button class="btn btn-sm">Iniciar Lição</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="sobre">
+          <h2>Sobre o Xadrez Educativo</h2>
+          <div class="sobre-conteudo">
+            <div class="sobre-texto">
+              <p>
+                O Xadrez Educativo é uma plataforma interativa projetada para
+                ensinar os fundamentos e estratégias do xadrez de forma didática
+                e envolvente.
+              </p>
+              <p>
+                Nosso objetivo é tornar o aprendizado do xadrez acessível a
+                todos, desde iniciantes absolutos até jogadores intermediários
+                que desejam aprimorar suas habilidades.
+              </p>
+              <h3>Recursos</h3>
+              <ul>
+                <li>Interface interativa para jogar contra o computador</li>
+                <li>Sistema de dicas educativas baseado no motor Stockfish</li>
+                <li>Tutoriais passo a passo de aberturas clássicas</li>
+                <li>Lições progressivas organizadas por nível de habilidade</li>
+                <li>Histórico de movimentos com explicações</li>
+              </ul>
+            </div>
+            <div class="sobre-imagem">
+              <img
+                src="assets/rei-branco.svg.png"
+                alt="Logo Xadrez Educativo"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2023 Xadrez Educativo | Desenvolvido com
+          <i class="fas fa-heart"></i> para amantes do xadrez
+        </p>
+      </div>
+    </footer>
+
+    <!-- Modal para exercícios -->
+    <div id="modal-exercicio" class="modal">
+      <div class="modal-conteudo">
+        <span class="fechar-modal">&times;</span>
+        <h3 class="modal-titulo">Exercício</h3>
+        <div class="modal-corpo">
+          <!-- Conteúdo do exercício será inserido aqui -->
+        </div>
+        <div class="modal-rodape">
+          <button class="btn btn-primary" id="verificar-resposta">
+            Verificar
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
